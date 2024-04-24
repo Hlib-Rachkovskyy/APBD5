@@ -12,19 +12,19 @@ public class AnimalService : IAnimalService
         return _animalsRepository.GetAnimals(query);
     }
 
-    public void AddAnimal(Animal animal)
+    public int AddAnimal(Animal animal)
     {
-        _animalsRepository.AddAnimal(animal);
+        return _animalsRepository.AddAnimal(animal);
     }
 
-    public void UpdateAnimalData(Animal animal)
+    public int UpdateAnimalData(int idAnimal, Animal animal)
     {
-        _animalsRepository.UpdateAnimalData(animal);
+        return _animalsRepository.UpdateAnimalData(animal);
     }
 
-    public void DeleteAnimal(int idAnimal)
+    public int DeleteAnimal(int idAnimal)
     {
-        _animalsRepository.DeleteAnimal(idAnimal);
+        return _animalsRepository.DeleteAnimal(idAnimal);
     }
 
    

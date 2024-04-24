@@ -28,6 +28,7 @@ public AnimalsRepository(IConfiguration configuration)
                 Name = reader["Name"].ToString(),
                 Area = reader["Area"].ToString(),
                 Category = reader["Category"].ToString(),
+                Description = reader["Description"].ToString()
             };
             animals.Add(animal);
         }
@@ -38,8 +39,7 @@ public AnimalsRepository(IConfiguration configuration)
     {
         using var sqlConnection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
         sqlConnection.Open();
-        using var comand = new SqlCommand("INSERT INTO ...", sqlConnection);
-        comand.Parameters.AddWithValue("@IdAnimal", animal.IdAnimal);
+        using var comand = new SqlCommand("INSERT INTO ANIMALS (Name, Area, Category, Description) VALUES (@Name, @Area, @Category, @Description)", sqlConnection);
         comand.Parameters.AddWithValue("@Area", animal.Area);
         comand.Parameters.AddWithValue("@Category", animal.Category);
         comand.Parameters.AddWithValue("@Name", animal.Name);

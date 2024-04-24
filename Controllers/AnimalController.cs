@@ -1,4 +1,5 @@
-﻿using APBD5.Services;
+﻿using APBD5.Model;
+using APBD5.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APBD5.Controllers;
@@ -13,13 +14,29 @@ public class AnimalController : ControllerBase
     {
         _animalService = animalService;
     }
-    
-    
-    
     [HttpGet]
-    public IActionResult GetAnimals(string query)
+    public IActionResult GetAnimals(string query = "name")
     {
         return Ok(_animalService.GetAnimals(query));
     }
-    
+    [HttpPost]
+    public IActionResult AddAnimal(Animal animal)
+    {
+        _animalService.AddAnimal(animal);
+        return StatusCode(StatusCodes.Status201Created);
+    }
+
+    [HttpPut("{idAnimal:int}")]
+    public IActionResult UpdateAnimal(int idAnimal, Animal animal)
+    {
+        _animalService.UpdateAnimalData(idAnimal ,animal);
+        return NoContent();
+    }
+
+    [HttpDelete("{idAnimal:int}")]
+    public IActionResult DeleteAnimal(int idAnimal)
+    {
+        _animalService.DeleteAnimal(idAnimal);
+        return NoContent();
+    }
 }

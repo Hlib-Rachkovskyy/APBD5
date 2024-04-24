@@ -5,7 +5,7 @@ namespace APBD5.Services;
 public interface IAnimalService
 {
     IEnumerable<Animal> GetAnimals(string query);
-    public void AddAnimal(Animal animal);
-    public void UpdateAnimalData(Animal animal);
-    public void DeleteAnimal(int idAnimal);
+    public int AddAnimal(Animal animal);
+    public int UpdateAnimalData(int idAnimal, Animal animal);
+    public int DeleteAnimal(int idAnimal);
 }
