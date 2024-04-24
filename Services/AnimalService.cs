@@ -12,14 +12,14 @@ public class AnimalService : IAnimalService
         return _animalsRepository.GetAnimals(query);
     }
 
-    public int AddAnimal(Animal animal)
+    public int CreateAnimal(Animal animal)
     {
-        return _animalsRepository.AddAnimal(animal);
+        return _animalsRepository.CreateAnimal(animal);
     }
 
     public int UpdateAnimalData(int idAnimal, Animal animal)
     {
-        return _animalsRepository.UpdateAnimalData(animal);
+        return _animalsRepository.UpdateAnimalData(idAnimal, animal);
     }
 
     public int DeleteAnimal(int idAnimal)

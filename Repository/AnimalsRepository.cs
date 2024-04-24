@@ -35,7 +35,7 @@ public AnimalsRepository(IConfiguration configuration)
         return animals;
     }
 
-    public int AddAnimal(Animal animal)
+    public int CreateAnimal(Animal animal)
     {
         using var sqlConnection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
         sqlConnection.Open();
@@ -49,12 +49,12 @@ public AnimalsRepository(IConfiguration configuration)
         return count;
     }
 
-    public int UpdateAnimalData(Animal animal)
+    public int UpdateAnimalData(int idAnimal, Animal animal)
     {
         using var SqlConnection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
         SqlConnection.Open();
         using var SqlCommand = new SqlCommand("UPDATE ANIMALS SET Name = @name, Description = @description, Category = @category, Area = @area WHERE IdAnimal = @idAnimal", SqlConnection);
-        SqlCommand.Parameters.AddWithValue("@idAnimal", animal.IdAnimal);
+        SqlCommand.Parameters.AddWithValue("@idAnimal", idAnimal);
         SqlCommand.Parameters.AddWithValue("@name", animal.Name);
         SqlCommand.Parameters.AddWithValue("@description", animal.Description);
         SqlCommand.Parameters.AddWithValue("@category", animal.Category);

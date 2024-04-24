@@ -20,9 +20,9 @@ public class AnimalController : ControllerBase
         return Ok(_animalService.GetAnimals(query));
     }
     [HttpPost]
-    public IActionResult AddAnimal(Animal animal)
+    public IActionResult CreateAnimal(Animal animal)
     {
-        _animalService.AddAnimal(animal);
+        _animalService.CreateAnimal(animal);
         return StatusCode(StatusCodes.Status201Created);
     }
 
