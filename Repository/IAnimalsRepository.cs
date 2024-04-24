@@ -4,10 +4,9 @@ namespace APBD5.Repository;
 
 public interface IAnimalsRepository
 {
-    public IEnumerable<Animal> GetAnimals();
-    public void AddAnimal(Animal animal);
-    public void UpdateAnimalData(int idAnimal);
-    public void DeleteAnimal(int idAnimal);
-    public Animal GetAnimal(int id);
+    public IEnumerable<Animal> GetAnimals(string query);
+    public int AddAnimal(Animal animal);
+    public int UpdateAnimalData(Animal animal);
+    public int DeleteAnimal(int idAnimal);
 
 }

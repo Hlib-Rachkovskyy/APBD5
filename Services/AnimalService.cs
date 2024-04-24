@@ -7,9 +7,9 @@ public class AnimalService : IAnimalService
 {
 
     private readonly IAnimalsRepository _animalsRepository;
-    public IEnumerable<Animal> GetAnimals()
+    public IEnumerable<Animal> GetAnimals(string query)
     {
-        return _animalsRepository.GetAnimals();
+        return _animalsRepository.GetAnimals(query);
     }
 
     public void AddAnimal(Animal animal)
@@ -17,9 +17,9 @@ public class AnimalService : IAnimalService
         _animalsRepository.AddAnimal(animal);
     }
 
-    public void UpdateAnimalData(int idAnimal)
+    public void UpdateAnimalData(Animal animal)
     {
-        _animalsRepository.UpdateAnimalData(idAnimal);
+        _animalsRepository.UpdateAnimalData(animal);
     }
 
     public void DeleteAnimal(int idAnimal)
@@ -27,8 +27,5 @@ public class AnimalService : IAnimalService
         _animalsRepository.DeleteAnimal(idAnimal);
     }
 
-    public Animal GetAnimal(int id)
-    {
-        return _animalsRepository.GetAnimal(id);
-    }
+   
 }

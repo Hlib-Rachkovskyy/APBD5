@@ -13,12 +13,12 @@ public AnimalsRepository(IConfiguration configuration)
     _configuration = configuration;
 }
 
-    public IEnumerable<Animal> GetAnimals()
+    public IEnumerable<Animal> GetAnimals(string query)
     {
         var animals = new List<Animal>();
         using var sqlConnection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
         sqlConnection.Open();
-        using var command = new SqlCommand("SELECT * FROM ANIMALS", sqlConnection);
+        using var command = new SqlCommand("SELECT * FROM ANIMALS a ORDER BY @query", sqlConnection);
         using var reader = command.ExecuteReader();
         while (reader.Read())
         {
@@ -34,23 +34,46 @@ public AnimalsRepository(IConfiguration configuration)
         return animals;
     }
 
-    public void AddAnimal(Animal animal)
+    public int AddAnimal(Animal animal)
     {
-        throw new NotImplementedException();
+        using var sqlConnection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+        sqlConnection.Open();
+        using var comand = new SqlCommand("INSERT INTO ...", sqlConnection);
+        comand.Parameters.AddWithValue("@IdAnimal", animal.IdAnimal);
+        comand.Parameters.AddWithValue("@Area", animal.Area);
+        comand.Parameters.AddWithValue("@Category", animal.Category);
+        comand.Parameters.AddWithValue("@Name", animal.Name);
+        comand.Parameters.AddWithValue("@Description", animal.Description);
+
+        var count = comand.ExecuteNonQuery();
+        return count;
     }
 
-    public void UpdateAnimalData(int idAnimal)
+    public int UpdateAnimalData(Animal animal)
     {
-        throw new NotImplementedException();
+        using var SqlConnection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+        SqlConnection.Open();
+        using var SqlCommand = new SqlCommand("UPDATE ANIMALS SET Name = @name, Description = @description, Category = @category, Area = @area WHERE IdAnimal = @idAnimal", SqlConnection);
+        SqlCommand.Parameters.AddWithValue("@idAnimal", animal.IdAnimal);
+        SqlCommand.Parameters.AddWithValue("@name", animal.Name);
+        SqlCommand.Parameters.AddWithValue("@description", animal.Description);
+        SqlCommand.Parameters.AddWithValue("@category", animal.Category);
+        SqlCommand.Parameters.AddWithValue("@area", animal.Area);
+
+        
+        
+        var count = SqlCommand.ExecuteNonQuery();
+        return count;
     }
 
-    public void DeleteAnimal(int idAnimal)
+    public int DeleteAnimal(int idAnimal)
     {
-        throw new NotImplementedException();
+        using var sqlConnection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+        sqlConnection.Open();
+        using var sqlCommand = new SqlCommand("DELETE FROM ANIMALS WHERE IdAnimal = @idAnimal", sqlConnection);
+        sqlCommand.Parameters.AddWithValue("@idAnimal", idAnimal);
+        var count = sqlCommand.ExecuteNonQuery();
+        return count;
     }
-
-    public Animal GetAnimal(int id)
-    {
-        throw new NotImplementedException();
-    }
+    
 }
